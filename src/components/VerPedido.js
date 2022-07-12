@@ -106,6 +106,7 @@ export default function VerPedido() {
       
     )
   }
+  // Comentario para GitHub
 
 
   // Función para cambiar el estado de el pedido a recibido
