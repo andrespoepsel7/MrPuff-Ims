@@ -6,7 +6,6 @@ export const alerta = (cargando, titulo, icono=null, mensaje) => {
             position: 'center',
             title: titulo,
             text :mensaje,
-            timer:2000,
             showConfirmButton: false,
             allowEnterKey:false,
             allowEscapeKey:false,

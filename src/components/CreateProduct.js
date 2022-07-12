@@ -4,6 +4,7 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { collection, addDoc } from 'firebase/firestore'
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom'
+import { alerta } from '../functions/functions'
 
 export default function CreateProduct() {
 	// Referencia a la base de datos:
@@ -35,18 +36,7 @@ export default function CreateProduct() {
 			// Subir el archivo a cloud storage
 			const storageRef = ref(storage,`images/${file.name}`)
 
-			Swal.fire({
-				position: 'center',
-				title: 'Procesando información!',
-				text:'El producto está siendo creado, por favor espere...',
-				showConfirmButton: false,
-				allowEnterKey:false,
-				allowEscapeKey:false,
-				allowOutsideClick:false,
-				didOpen: ()=>{
-					Swal.showLoading()
-				},
-			})
+			alerta(true, 'Procesando información', null, 'El producto está siendo creado, porfavor espere...')
 
 			await uploadBytes(storageRef, file).then(async()=>{
 				await getDownloadURL(storageRef).then((url)=>{
@@ -59,11 +49,7 @@ export default function CreateProduct() {
 						date:date,
 						photo:url,
 					}).then(()=>{
-						Swal.fire({
-							position: 'center',
-							icon: 'success',
-							title: 'El producto se creó correctamente!',
-						})
+						alerta(false, 'Exitoso!', 'success', 'El producto se creó correctamente!')
 					}).catch((err)=>{
 						console.log("Error al crear un producto", err)
 					})
@@ -79,11 +65,7 @@ export default function CreateProduct() {
 		
 			
 		}else{
-			Swal.fire({
-				icon: 'error',
-				title: 'Error!',
-				text: 'Se deben llenar todos los espacios!',
-			})
+			alerta(false, 'Error!', 'error', 'Se deben llenar todos los espacios!')
 		}
 		
 		

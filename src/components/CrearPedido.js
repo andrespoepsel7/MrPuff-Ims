@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { db } from '../firebase/firebase'
 import { collection, query, onSnapshot, orderBy, addDoc } from 'firebase/firestore'
 import Swal from 'sweetalert2'
+import { alerta } from '../functions/functions'
 
 
 export default function CrearPedido() {
@@ -133,19 +134,7 @@ export default function CrearPedido() {
 		// Query a la referencia
 		const q = query(ref, orderBy('name', 'asc'))
 
-		Swal.fire({
-			allowOutsideClick:false,
-			allowEscapeKey:false,
-			allowEnterKey:false,
-			timer: 1500,
-			position: 'center',
-			title: 'Buscando datos!',
-			text:'Obteniendo información de la nube, por favor espere...',
-			showConfirmButton: false,
-			didOpen: ()=>{
-				Swal.showLoading()
-			},
-		})
+        alerta(true, 'Buscando datos!', null, 'Obteniendo información de la nube, porfavor espere...')
 
 		// Función unsubscribe
 		const unsub = onSnapshot(q, (snapshot) => {

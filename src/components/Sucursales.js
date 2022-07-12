@@ -4,6 +4,7 @@ import {collection, getDocs, deleteDoc,doc} from 'firebase/firestore'
 import Swal from 'sweetalert2'
 import {AiFillDelete, AiOutlineUserAdd} from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
+import { alerta } from '../functions/functions'
 
 export default function Sucursales() {
   
@@ -16,23 +17,12 @@ export default function Sucursales() {
 
   // Función para obtener sucursales
   const getSucursales = async()=>{
-    Swal.fire({
-      allowOutsideClick:false,
-      allowEscapeKey:false,
-      allowEnterKey:false,
-      position: 'center',
-      timer: 1500,
-      title: 'Buscando datos!',
-      text:'Obteniendo información de la nube, por favor espere...',
-      showConfirmButton: false,
-      didOpen: ()=>{
-        Swal.showLoading()
-      },
-    })
+    alerta(true, 'Buscando datos!', null, 'Obteniendo datos de la nube, porfavor espere...')
     const data = await getDocs(refSucursales)
     setSucursales(
       data.docs.map((doc)=> ({...doc.data(), id:doc.id}))
     )
+    Swal.close()
   }
 
   // Función para eliminar sucursal

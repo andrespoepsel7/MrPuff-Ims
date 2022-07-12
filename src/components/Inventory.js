@@ -5,6 +5,7 @@ import Swal from 'sweetalert2'
 import { db } from '../firebase/firebase'
 import { useUserAuth } from '../context/UserAuthContext'
 import {TbTruckDelivery} from 'react-icons/tb'
+import { alerta } from '../functions/functions'
 
 export default function Inventory() {
   
@@ -37,6 +38,7 @@ export default function Inventory() {
       setFechaEdicion(doc.data().fechaEdicion)
       setUid(doc.data().uid)
     })
+    Swal.close()
   }
 
   const sumaInventario = () => {
@@ -49,20 +51,7 @@ export default function Inventory() {
 
 
   useEffect(()=>{
-
-		Swal.fire({
-			allowOutsideClick:false,
-			allowEscapeKey:false,
-			allowEnterKey:false,
-			timer: 1500,
-			position: 'center',
-			title: 'Buscando datos!',
-			text:'Obteniendo información de la nube, por favor espere...',
-			showConfirmButton: false,
-			didOpen: ()=>{
-				Swal.showLoading()
-			},
-		})
+    alerta(true, 'Buscando datos!', null, 'Obteniendo información de la nube, porfavor espere...')
 
 		getInventario()
     

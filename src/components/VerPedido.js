@@ -4,6 +4,7 @@ import { collection, doc, getDoc, query, updateDoc, where, getDocs } from 'fireb
 import Swal from 'sweetalert2'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useUserAuth } from '../context/UserAuthContext'
+import { alerta } from '../functions/functions'
 
 export default function VerPedido() {
   // Se importa el usuario de context para añadir datos al inventario
@@ -35,20 +36,7 @@ export default function VerPedido() {
 
   // Obtener la información del pedido desde la base de datos
 	const getPedidoById = async()=> {
-		Swal.fire({
-			allowOutsideClick:false,
-			allowEscapeKey:false,
-			allowEnterKey:false,
-			timer: 1500,
-			position: 'center',
-			title: 'Buscando datos!',
-			text:'Obteniendo información de la nube, por favor espere...',
-			showConfirmButton: false,
-			didOpen: ()=>{
-				Swal.showLoading()
-			},
-		})
-		
+    alerta(true, 'Buscando datos!', null, 'Obteniendo información de la nube, porfavor espere...')
 
     const docSnap = await getDoc(docRef)
 
@@ -127,34 +115,13 @@ export default function VerPedido() {
       proveedor:proveedor
 		}
 
-		Swal.fire({
-			allowOutsideClick:false,
-			allowEscapeKey:false,
-			allowEnterKey:false,
-			position: 'center',
-			title: 'Marcando producto como recibido!',
-			text:'Esperando respuesta del servidor...',
-			showConfirmButton: false,
-			didOpen: ()=>{
-				Swal.showLoading()
-			},
-		})
+    alerta(true, 'Marcando pedido como recibido!', null, 'Esperando respuesta del servidor...')
 
     await updateDoc(docRef, data).then(()=>{
       Swal.close()
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Exitoso!!',
-        showConfirmButton:true,
-      })
+      alerta(false, 'Exitoso!', 'success', 'El pedido se marcó correctamente como recibido!')
 		}).catch((err)=>{
-			Swal.fire({
-				position:'center',
-				icon:'error',
-				title:'Error!', 
-        text:err.message,
-			})
+      alerta(false, 'Error!', 'error', err.message)
 		})
 
     // Variable para aumentar productos que no existen en el inventario

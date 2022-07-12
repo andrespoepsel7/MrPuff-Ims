@@ -6,6 +6,7 @@ import {MdCreateNewFolder} from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import {TbListDetails} from 'react-icons/tb'
 import { Link } from 'react-router-dom'
+import { alerta } from '../functions/functions'
 
 export default function Pedidos() {
   // HOOKS
@@ -19,19 +20,7 @@ export default function Pedidos() {
 		// Query a la referencia
 		const q = query(ref, orderBy('nombre', 'desc'))
 
-		Swal.fire({
-			allowOutsideClick:false,
-			allowEscapeKey:false,
-			allowEnterKey:false,
-			timer: 1500,
-			position: 'center',
-			title: 'Buscando datos!',
-			text:'Obteniendo información de la nube, por favor espere...',
-			showConfirmButton: false,
-			didOpen: ()=>{
-				Swal.showLoading()
-			},
-		})
+    alerta(true, 'Buscando datos!', null, 'Obteniendo información de la nube, porfavor espere...')
 
 		// Función unsubscribe
 		const unsub = onSnapshot(q, (snapshot) => {

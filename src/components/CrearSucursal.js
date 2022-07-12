@@ -3,6 +3,7 @@ import { useUserAuth } from '../context/UserAuthContext'
 import Swal from 'sweetalert2'
 import { db } from '../firebase/firebase'
 import { onSnapshot, query, orderBy, collection } from 'firebase/firestore'
+import { alerta } from '../functions/functions'
 
 export default function CrearSucursal() {
 
@@ -41,15 +42,7 @@ export default function CrearSucursal() {
     console.log(email, password, password2, role, dir, ciudad)
     if(password === password2){
       try{
-        Swal.fire({
-          position: 'center',
-          title: 'Iniciando sesión!',
-          text:'Obteniendo información de la nube...',
-          showConfirmButton: false,
-          didOpen: ()=>{
-            Swal.showLoading()
-          },
-        })
+        alerta(true, 'Iniciando sesión', null, 'Obteniendo información de la nube...')
         asignarProductos()
         await signUp(email, password, role, name, dir, ciudad, productsAux).then(()=>{
           Swal.close()
@@ -63,13 +56,7 @@ export default function CrearSucursal() {
       }
     }else{
       console.log("Las contraseñas no coinciden")
-      Swal.fire({
-        position: 'center',
-        icon: 'error',
-        title: 'Error!',
-        text:'Las contraseñas no coinciden ó no se asignó el rol correctamente...',
-        showConfirmButton: true,
-      })
+      alerta(false, 'Error!', 'error', 'Las contraseñas no coinciden ó  no se asignó el rol correctamente')
     }
     
   }
@@ -83,19 +70,7 @@ export default function CrearSucursal() {
 		// Query a la referencia
 		const q = query(ref, orderBy('name', 'asc'))
 
-		Swal.fire({
-			allowOutsideClick:false,
-			allowEscapeKey:false,
-			allowEnterKey:false,
-			timer: 1500,
-			position: 'center',
-			title: 'Buscando datos!',
-			text:'Obteniendo información de la nube, por favor espere...',
-			showConfirmButton: false,
-			didOpen: ()=>{
-				Swal.showLoading()
-			},
-		})
+    alerta(true, 'Buscando datos!', null, 'Obteniendo información de la nube, porfavor espere...')
 
 		// Función unsubscribe
 		const unsub = onSnapshot(q, (snapshot) => {

@@ -3,6 +3,7 @@ import { db } from '../firebase/firebase'
 import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import Swal from 'sweetalert2'
 import { useNavigate, useParams } from 'react-router-dom'
+import { alerta } from '../functions/functions'
 
 export default function CreateProduct() {
 	
@@ -23,20 +24,7 @@ export default function CreateProduct() {
 
 	// Se obtiene el producto por id
 	const getProductById = async()=> {
-		Swal.fire({
-			allowOutsideClick:false,
-			allowEscapeKey:false,
-			allowEnterKey:false,
-			timer: 1500,
-			position: 'center',
-			title: 'Buscando datos!',
-			text:'Obteniendo información de la nube, por favor espere...',
-			showConfirmButton: false,
-			didOpen: ()=>{
-				Swal.showLoading()
-			},
-		})
-		
+		alerta(true, 'Buscando datos!', null, 'Obteniendo información de la nube, porfavor espere...')
 
         const docSnap = await getDoc(docRef)
 
@@ -74,32 +62,13 @@ export default function CreateProduct() {
 			editDate:editDate
 		}
 
-		Swal.fire({
-			allowOutsideClick:false,
-			allowEscapeKey:false,
-			allowEnterKey:false,
-			position: 'center',
-			title: 'Editando Documento!',
-			text:'Esperando respuesta del servidor...',
-			showConfirmButton: false,
-			didOpen: ()=>{
-				Swal.showLoading()
-			},
-		})
+		alerta(true, 'Editando documento!', null, 'Esperando respuesta del servidor...')
 
         await updateDoc(docRef, data).then(()=>{
 			Swal.close()
-			Swal.fire({
-				position: 'center',
-				icon: 'success',
-				title: 'El producto se editó correctamente!',
-			})
+			alerta(false, 'Exitoso!', 'success', 'El producto se editó correctamente!')
 		}).catch((err)=>{
-			Swal.fire({
-				position:'center',
-				icon:'error',
-				title:'Error al editar producto!'
-			})
+			alerta(false, 'Error', 'error', 'Error al editar producto!')
 		})
         navigate('/productos')
 		
