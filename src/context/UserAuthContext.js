@@ -60,12 +60,7 @@ export function UserAuthContextProvider({children}){
             ediciones:{},
             fechaCreacion:date,
           })
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Se ha creado correctamente la sucursal!',
-            showConfirmButton: true,
-          })
+          alerta(false, 'Exitoso!', 'success', 'Se ha creado correctamente la sucursal!')
 
         }).catch((err2)=>{
           console.log("Error 2", err2)
@@ -73,13 +68,7 @@ export function UserAuthContextProvider({children}){
       
     }catch(err){
       console.log(err)
-      Swal.fire({
-        position: 'center',
-        icon: 'danger',
-        title: 'Error!',
-        text:{err},
-        showConfirmButton: true,
-      })
+      alerta(false, 'Error', 'error', 'Ocurrió un error, volver a intentar...')
     }
     
   }
