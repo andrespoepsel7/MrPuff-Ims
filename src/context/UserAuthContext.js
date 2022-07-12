@@ -15,6 +15,7 @@ import { getAdminRole } from '../firebase/firebase'
 import { addAdminRole } from '../firebase/firebase'
 import Swal from 'sweetalert2'
 import { doc, setDoc, collection, getDocs } from 'firebase/firestore'
+import { alerta } from '../functions/functions'
 
 
 // Alertas para mostrar visualmente mensajes
@@ -98,26 +99,12 @@ export function UserAuthContextProvider({children}){
   // Función para iniciar sesión
   async function logIn(email, password){
     try{
-      Swal.fire({
-        position: 'center',
-        title: 'Iniciando sesión!',
-        text:'Obteniendo información de la nube...',
-        showConfirmButton: false,
-        didOpen: ()=>{
-          Swal.showLoading()
-        },
-      })
+      alerta(true, 'Iniciando sesión...', null, 'Obteniendo información de la nube')
       return await signInWithEmailAndPassword(auth, email, password).then(()=>{
         Swal.close()
         console.log("Sesión iniciada correctamente")
       }).catch((err)=>{
-        Swal.fire({
-          position: 'center',
-          icon: 'error',
-          title: 'Error!',
-          text:err.message,
-          showConfirmButton: true,
-        })
+        alerta(false, 'Error', 'error', err.message)
       })
     }catch(err){
       console.log(err)

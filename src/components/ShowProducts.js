@@ -11,13 +11,13 @@ import { Link } from 'react-router-dom'
 export default function ShowProducts() {
 	// Para navegar entre páginas
 	const navigate = useNavigate()
-  // Hook para la lista de productos
+	// Hook para la lista de productos
 	const [products, setProducts] = useState([])
 	// Datos del usuario
 	const {user} = useUserAuth()
 
 	// Use effect para renderización de los datos
-  useEffect(()=>{
+  	useEffect(()=>{
 
 		// Referencia a la tabla de usuarios
 		const ref = collection(db, 'productos')
@@ -46,7 +46,7 @@ export default function ShowProducts() {
     
 		return unsub
     
-  }, [])
+  	}, [])
 
   return (
     <>
