@@ -7,6 +7,7 @@ import { useUserAuth } from '../context/UserAuthContext'
 import {AiOutlineFileAdd} from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import { alerta } from '../functions/functions'
 
 export default function ShowProducts() {
 	// Para navegar entre páginas
@@ -18,36 +19,18 @@ export default function ShowProducts() {
 
 	// Use effect para renderización de los datos
   	useEffect(()=>{
-
 		// Referencia a la tabla de usuarios
 		const ref = collection(db, 'productos')
 		// Query a la referencia
 		const q = query(ref, orderBy('name', 'asc'))
-
-		Swal.fire({
-			allowOutsideClick:false,
-			allowEscapeKey:false,
-			allowEnterKey:false,
-			timer: 1500,
-			position: 'center',
-			title: 'Buscando datos!',
-			text:'Obteniendo información de la nube, por favor espere...',
-			showConfirmButton: false,
-			didOpen: ()=>{
-				Swal.showLoading()
-			},
-		})
-
+		alerta(true, 'Buscando datos!', null, 'Obteniendo información de la nube, porfavor espere...')
 		// Función unsubscribe
 		const unsub = onSnapshot(q, (snapshot) => {
 			setProducts(snapshot.docs.map((doc) => ({...doc.data(), id:doc.id})))
 			Swal.close()
 		})
-    
 		return unsub
-    
   	}, [])
-
   return (
     <>
 		{user.role === 'admin' ? 
