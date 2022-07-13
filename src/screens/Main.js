@@ -104,12 +104,21 @@ export default function Main({componente}) {
                     <BiPurchaseTagAlt className='ml-4 mr-1'/>
                     <p className='mt-0'>Pedidos</p>
                 </button>
-
+                
+                {user.role === 'admin' ? 
+                <button onClick={()=>navigate('/entregas-admin')} className={`w-[240px] bg-cyan-600 text-xl text-gray-100 text-left h-[45px] 
+                flex items-center rounded-md mb-4 hover:bg-cyan-500`}>
+                    <TbTruckDelivery className='ml-4 mr-1'/>
+                    <p className='mt-0'>Entregas</p>
+                </button>
+                :
                 <button onClick={()=>navigate('/entregas')} className={`w-[240px] bg-cyan-600 text-xl text-gray-100 text-left h-[45px] 
                 flex items-center rounded-md mb-4 hover:bg-cyan-500`}>
                     <TbTruckDelivery className='ml-4 mr-1'/>
                     <p className='mt-0'>Entregas</p>
                 </button>
+                }
+                
 
                 <button onClick={()=>navigate('/sucursales')} className=' w-[240px] bg-cyan-600 text-xl text-gray-100 text-left h-[45px] 
                 flex items-center rounded-md mb-4 hover:bg-cyan-500'>

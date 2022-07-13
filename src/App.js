@@ -18,6 +18,7 @@ import HomeEditProduct from './screens/HomeEditProduct';
 import HomeCrearPedido from './screens/HomeCrearPedido';
 import HomeVerPedido from './screens/HomeVerPedido';
 import HomeVerDetallesInventario from './screens/HomeVerDetallesInventario';
+import HomeEntregasAdmin from './screens/HomeEntregasAdmin';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Route path='/inventario' element={<ProtectedRoute><HomeInventory/></ProtectedRoute>}/>
         <Route path='/pedidos' element={<ProtectedRoute><HomePedidos/></ProtectedRoute>}/>
         <Route path='/entregas' element={<ProtectedRoute><HomeEntregas/></ProtectedRoute>}/>
+        <Route path='/entregas-admin' element={<ProtectedRoute><HomeEntregasAdmin/></ProtectedRoute>}/>
         <Route path='/sucursales' element={<ProtectedRoute><HomeSucursales/></ProtectedRoute>}/>
         <Route path='/crear-sucursal' element={<ProtectedRoute><HomeCrearSucursal/></ProtectedRoute>}/>
         <Route path='/ventas' element={<ProtectedRoute><HomeVentas/></ProtectedRoute>}/>
