@@ -19,6 +19,7 @@ import HomeCrearPedido from './screens/HomeCrearPedido';
 import HomeVerPedido from './screens/HomeVerPedido';
 import HomeVerDetallesInventario from './screens/HomeVerDetallesInventario';
 import HomeEntregasAdmin from './screens/HomeEntregasAdmin';
+import HomeCrearEntrega from './screens/HomeCrearEntrega'
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
         <Route path='/crear-pedido' element={<ProtectedRoute><HomeCrearPedido/></ProtectedRoute>}/>
         <Route path='/ver-pedido/:id' element={<ProtectedRoute><HomeVerPedido/></ProtectedRoute>}/>
         <Route path='/ver-detalles-inventario/:id' element={<ProtectedRoute><HomeVerDetallesInventario/></ProtectedRoute>}/>
+        <Route path='/crear-entrega' element={<ProtectedRoute><HomeCrearEntrega/></ProtectedRoute>}/>
       </Routes>
     </UserAuthContextProvider>
     

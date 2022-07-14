@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import { db, storage } from '../firebase/firebase'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { collection, addDoc } from 'firebase/firestore'
-import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom'
 import { alerta } from '../functions/functions'
 

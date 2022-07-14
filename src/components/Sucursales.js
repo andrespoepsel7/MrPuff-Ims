@@ -87,23 +87,23 @@ export default function Sucursales() {
               </div>
             </h1>
             <div className='w-full border-t border-gray-500 my-3'></div>
-            <div>
+            <div className='mb-2'>
               <p className='font-bold'>Ciudad:</p>
               <p>{sucursal.ciudad}</p>
             </div>
-            <div>
+            <div className='mb-2'>
               <p className='font-bold'>Dirección:</p>
               <p>{sucursal.dir}</p>
             </div>
-            <div>
+            <div className='mb-2'>
               <p className='font-bold'>Email:</p>
               <p>{sucursal.email}</p>
             </div>
-            <div>
+            <div className='mb-2'>
               <p className='font-bold'>Rol:</p>
               <p>{sucursal.dir === 'admin' ? "Administrador":"Usuario"}</p>
             </div>
-            <div>
+            <div className='mb-2'>
               <p className='font-bold'>Uid:</p>
               <p>{sucursal.uid}</p>
             </div>

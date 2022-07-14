@@ -14,7 +14,7 @@ import { getAdminRole } from '../firebase/firebase'
 // Cloud function to add role to user
 import { addAdminRole } from '../firebase/firebase'
 import Swal from 'sweetalert2'
-import { doc, setDoc, collection, getDocs } from 'firebase/firestore'
+import { doc, setDoc } from 'firebase/firestore'
 import { alerta } from '../functions/functions'
 
 

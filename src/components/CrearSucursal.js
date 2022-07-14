@@ -15,7 +15,7 @@ export default function CrearSucursal() {
   const [dir, setDir] = useState("")
   const [ciudad, setCiudad] = useState("")
   const [products, setProducts] = useState([])
-  const [productsAux, setProductsAux] = useState([])
+  const productsAux = []
 
   // Funciones y estados de context
   const{signUp, logOut} = useUserAuth()

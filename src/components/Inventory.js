@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { collection, query, where, getDocs } from 'firebase/firestore'
 import Swal from 'sweetalert2'
 import { db } from '../firebase/firebase'
@@ -8,17 +8,14 @@ import {TbTruckDelivery} from 'react-icons/tb'
 import { alerta } from '../functions/functions'
 
 export default function Inventory() {
-  
-  // Para navegar entre páginas
-  const navigate = useNavigate()
 
   // Para tener los datos del usuario
   const{user} = useUserAuth()
 
   // HOOKS
   const [productos, setProductos] = useState([])
-  const [ediciones, setEdiciones] = useState([])
-  const [email, setEmail] = useState()
+  // const [ediciones, setEdiciones] = useState([])
+  // const [email, setEmail] = useState()
   const [fechaEdicion, setFechaEdicion] = useState()
   const [uid, setUid] = useState()
 
@@ -33,8 +30,8 @@ export default function Inventory() {
 		const inventarioSnapshot = await getDocs(q)
     inventarioSnapshot.forEach((doc)=>{
       setProductos(doc.data().productos)
-      setEdiciones(doc.data().ediciones)
-      setEmail(doc.data().email)
+      // setEdiciones(doc.data().ediciones)
+      // setEmail(doc.data().email)
       setFechaEdicion(doc.data().fechaEdicion)
       setUid(doc.data().uid)
     })
