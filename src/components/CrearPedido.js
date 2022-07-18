@@ -54,26 +54,12 @@ export default function CrearPedido() {
             products:productsAux,
         }
         // Alerta que dice que se está creando el pedido
-        Swal.fire({
-            position: 'center',
-            title: 'Procesando información!',
-            text:'El pedido está siendo creado, por favor espere...',
-            showConfirmButton: false,
-            allowEnterKey:false,
-            allowEscapeKey:false,
-            allowOutsideClick:false,
-            didOpen: ()=>{
-                Swal.showLoading()
-            },
-        })
+        alerta(true, 'Procesando información!', null, 'El pedido está siendo creado, porfavor espere...')
 
         await addDoc(refDb, dataToSumit).then(()=>{
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'El producto se creó correctamente!',
-            })
+            alerta(false, 'Exitoso!', 'success', 'El pedido se creó correctamente!')
         }).catch((err)=>{
+            alerta(false, 'Error!', 'error', 'Ocurrió un error, vuelva a intentar...')
             Swal.fire({
                 position: 'center',
                 icon: 'error',

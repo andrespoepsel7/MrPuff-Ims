@@ -57,7 +57,7 @@ export function UserAuthContextProvider({children}){
             email:success.user.email,
             uid:success.user.uid,
             productos:productos, 
-            ediciones:{},
+            ediciones:[],
             fechaCreacion:date,
           })
           alerta(false, 'Exitoso!', 'success', 'Se ha creado correctamente la sucursal!')
