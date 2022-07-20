@@ -67,7 +67,7 @@ export default function CrearEntrega() {
                     nic:nic,
                     quantity:parseInt(value)
                 }
-                if(productsAux.length === 0){
+                if(productsAux.length === 0){ 
                     productsAux.push(dataProduct)
                 }else{
                     let coincide = false
@@ -112,7 +112,7 @@ export default function CrearEntrega() {
                 setProductosSucursal(inventarioSucursal.productos)
                 setEdiciones(inventarioSucursal.ediciones)
                 console.log(productosSucursal)
-                
+
                 const edicionesAux = ediciones
                 const dataEdiciones = {
                 fechaEdicion:date,
